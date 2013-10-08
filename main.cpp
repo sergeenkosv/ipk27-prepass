@@ -24,7 +24,7 @@ int main(int argc, char **argv)
 		return 1;
 	}
 	if (!is_name_valid(name)) {
-		std::cout << "Your name contain unprintable characters." << std::endl;
+		std::cout << "Your name seems to be not name." << std::endl;
 		std::cout << "I can\'t great you." << std::endl;
 		return 1;
 	}
