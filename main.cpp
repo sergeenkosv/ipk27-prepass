@@ -7,9 +7,44 @@ std::locale loc;
 bool is_name_valid(const std::string &name)
 {
 	typedef std::string::const_iterator const_iterator;
+	enum { whitespace, alpha, number, punct } whatread = whitespace;
 	for (const_iterator i = name.begin(); i != name.end(); ++i) {
-		if (!std::isprint(*i, loc))
-			return false;
+		switch (whatread) {
+		case whitespace:
+			if (std::isalpha(*i, loc)) {
+				whatread = alpha;
+			} else if (std::isdigit(*i,loc)) {
+				whatread = number;
+			} else if (!std::isspace(*i, loc)) {
+				return false;
+			}
+			break;
+		case alpha:
+			if (std::ispunct(*i, loc)) {
+				whatread = punct;
+			} else if (std::isspace(*i, loc)) {
+				whatread = whitespace;
+			} else if (!std::isalpha(*i, loc)) {
+				return false;
+			}
+			break;
+		case number:
+			if (std::ispunct(*i, loc)) {
+				whatread = punct;
+			} else if (std::isspace(*i, loc)) {
+				whatread = whitespace;
+			} else if (!std::isxdigit(*i, loc)) {
+				return false;
+			}
+			break;
+		case punct:
+			if (std::isspace(*i, loc)) {
+				whatread = whitespace;
+			} else {
+				return false;
+			}
+			break;
+		}
 	}
 	return true;
 }
