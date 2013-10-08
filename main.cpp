@@ -66,7 +66,7 @@ void normalize_name(std::string *s)
 		switch (whatread) {
 		case begin:
 			if (!std::isspace(*i, loc)) {
-				buf << *i;
+				buf << std::islower(*i, loc) ? std::toupper(*i, loc) : *i;
 				whatread = word;
 			}
 			break;
