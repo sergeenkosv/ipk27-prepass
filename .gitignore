@@ -1,0 +1,7 @@
+*.~*
+*.bpr
+*.bpf
+*.dfm
+*.res
+*.obj
+*.exe
