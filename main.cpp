@@ -19,6 +19,10 @@ int main(int argc, char **argv)
 	std::cout << "Enter your name:";
 	std::string name;
 	std::getline(std::cin, name);
+	if (name.empty()) {
+		std::cout << "I can\'t great you if you don\'t say me your name" << std::endl;
+		return 1;
+	}
 	if (!is_name_valid(name)) {
 		std::cout << "Your name contain unprintable characters." << std::endl;
 		std::cout << "I can\'t great you." << std::endl;
