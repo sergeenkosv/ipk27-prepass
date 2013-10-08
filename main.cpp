@@ -49,6 +49,11 @@ bool is_name_valid(const std::string &name)
 	return true;
 }
 
+bool is_name_multyword(const std::string &name)
+{
+	return name.find_first_of(" \t") != std::string::npos;
+}
+
 int main(int argc, char **argv)
 {
 	std::cout << "Enter your name:";
@@ -63,6 +68,7 @@ int main(int argc, char **argv)
 		std::cout << "I can\'t great you." << std::endl;
 		return 1;
 	}
-	std::cout << "Hello, " << name << "!" << std::endl;
+	std::string greating = is_name_multyword(name) ? "Hello, " : "Hi, ";
+	std::cout << greating << name << "!" << std::endl;
 	return 0;
 }
